@@ -11,7 +11,7 @@ public class Object
     private string _type;
     private string _color;
 
-    // Properties
+    // Encapsulation: Using private fields with public properties to control access to the fields
     public string Name  
     {
         get { return _name; }
@@ -45,13 +45,13 @@ public class Object
         _color = color;
     }
     
-
-    // Methods
+    // Abstraction: Providing a generalized method that can be used in all subclasses
     public virtual string DisplayInfo()
     {
-       return $"Name: {Name}, Description: {Description}, Type: {Type}, Color: {Color} ";
+        return $"Name: {Name}, Description: {Description}, Type: {Type}, Color: {Color} ";
     }
     
+    // Abstraction: Providing a generalized method that can be overridden in subclasses
     public virtual float CalculateVolume()
     {
         return 0f;
@@ -63,9 +63,9 @@ public class Object
 public class Sphere : Object
 {
     // Fields
-   private float _radius;
+    private float _radius;
 
-    // Properties
+    // Encapsulation: Using private fields with public properties
     public float Radius
     {
         get { return _radius; }
@@ -73,18 +73,20 @@ public class Sphere : Object
     }
 
     // Constructors
-    public Sphere(string name, string description, string type, string color, float radius) : base(name, description, type, color)
+    public Sphere(string name, string description, string type, string color, float radius) 
+        : base(name, description, type, color) // Inheritance: Constructor calling base class constructor
     {
         _radius = radius;
     }
 
-    // Methods
+    // Polymorphism: Overriding a method from the base class to provide specific behavior for Sphere
     public override float CalculateVolume()
     {
         float volume = (4f / 3f) * Mathf.PI * Mathf.Pow(_radius, 3);
         return volume;
     }
 
+    // Polymorphism: Overriding a method from the base class to provide specific behavior for Sphere
     public override string DisplayInfo()
     {
         return base.DisplayInfo() + $", Radius: {Radius}, Volume: {CalculateVolume()} ";
@@ -98,27 +100,28 @@ public class Cube : Object
     // Fields
     private float _length;
 
-    // Properties
+    // Encapsulation: Using private fields with public properties
     public float Length
     {
         get { return _length; }
         set { _length = value; }
     }
 
-    // Constructors
-    public Cube(string name, string description, string type, string color, float length) : base(name, description, type, color)
+    // Inheritance: Constructor calling base class constructor
+    public Cube(string name, string description, string type, string color, float length) 
+        : base(name, description, type, color)
     {
         _length = length;
     }
 
-    // Methods
-
+    // Polymorphism: Overriding a method from the base class to provide specific behavior for Cube
     public override float CalculateVolume()
     {
         float volume = Mathf.Pow(_length, 3);
         return volume;
     }
 
+    // Polymorphism: Overriding a method from the base class to provide specific behavior for Cube
     public override string DisplayInfo()
     {
         return base.DisplayInfo() + $", Length: {Length}, Volume: {CalculateVolume()} ";
@@ -133,7 +136,7 @@ public class Cylinder : Object
     private float _cylinderRadius;
     private float _cylinderHeight;
 
-    // Properties
+    // Encapsulation: Using private fields with public properties
     public float Radius
     {
         get { return _cylinderRadius; }
@@ -146,21 +149,22 @@ public class Cylinder : Object
         set { _cylinderHeight = value; }
     }
 
-    // Constructors
-    public Cylinder(string name, string description, string type, string color, float radius, float height) : base(name, description, type, color)
+    // Inheritance: Constructor calling base class constructor
+    public Cylinder(string name, string description, string type, string color, float radius, float height) 
+        : base(name, description, type, color)
     {
         _cylinderRadius = radius;
         _cylinderHeight = height;
     }
 
-    // Methods
-
+    // Polymorphism: Overriding a method from the base class to provide specific behavior for Cylinder
     public override float CalculateVolume()
     {
         float volume = Mathf.PI * Mathf.Pow(_cylinderRadius, 2) * _cylinderHeight;
         return volume;
     }
 
+    // Polymorphism: Overriding a method from the base class to provide specific behavior for Cylinder
     public override string DisplayInfo()
     {
         return base.DisplayInfo() + $", Radius: {Radius}, Height: {Height}, Volume: {CalculateVolume()} ";
@@ -174,8 +178,7 @@ public class Capsule : Object
     private float _capsuleRadius;
     private float _capsuleHeight;
 
-    // Properties
-
+    // Encapsulation: Using private fields with public properties
     public float Radius
     {
         get { return _capsuleRadius; }
@@ -188,22 +191,26 @@ public class Capsule : Object
         set { _capsuleHeight = value; }
     }
 
-    // Constructors
-    public Capsule(string name, string description, string type, string color, float radius, float height) : base(name, description, type, color)
+    // Inheritance: Constructor calling base class constructor
+    public Capsule(string name, string description, string type, string color, float radius, float height) 
+        : base(name, description, type, color)
     {
         _capsuleRadius = radius;
         _capsuleHeight = height;
     }
 
-    // Methods
-    public override string DisplayInfo()
-    {
-        return base.DisplayInfo() + $", Radius: {Radius}, Height: {Height}, Volume: {CalculateVolume()} ";
-    }
-
+    // Polymorphism: Overriding a method from the base class to provide specific behavior for Capsule
     public override float CalculateVolume()
     {
         float volume = (4f / 3f) * Mathf.PI * Mathf.Pow(_capsuleRadius, 3) + Mathf.PI * Mathf.Pow(_capsuleRadius, 2) * _capsuleHeight;
         return volume;
     }
+
+    // Polymorphism: Overriding a method from the base class to provide specific behavior for Capsule
+    public override string DisplayInfo()
+    {
+        return base.DisplayInfo() + $", Radius: {Radius}, Height: {Height}, Volume: {CalculateVolume()} ";
+    }
 }
+
+
